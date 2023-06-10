@@ -1,8 +1,16 @@
+body {
+    background-color: #2B2B2B;
+}
+
 .app-wrapper {
+    background-color: #2B2B2B;
+    color: aliceblue;
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 150px 1fr;
     grid-template-rows: 2fr 17fr 2fr;
-    grid-gap: 10px;
+    grid-gap: 15px;
     grid-template-areas:
     "h h h"
     "n c c"
@@ -10,31 +18,35 @@
 }
 
 .logo {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
+
 }
 
 .background {
-    min-width: 100%;
-    min-height: 90%
+    max-width: 80%;
+    max-height: 80%;
 }
 
 .header {
     grid-area: h;
-    background-color: indianred;
+    background-color: #343434;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 50px;
 }
 
-.nav {
+.navigation {
     grid-area: n;
-    background-color: green;
+    background-color: #343434;
 }
 
-.content {
+.main {
     grid-area: c;
-    background-color: darkcyan;
+    background-color: #343434;
 }
 
 .footer {
     grid-area: f;
-    background-color: powderblue;
+    background-color: #343434;
 }
