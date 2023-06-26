@@ -1,12 +1,13 @@
 import React from "react";
-import slideshare from ".//slideshare.png"
+import slideshare from "../slideshare.png"
+import s from "./Header.module.css"
 
 export const Header = () => {
     return (
-        <div className={"header"}>
+        <div className={s.header}>
 
             <img
-                className={"logo"}
+                className={s.logo}
                 src={slideshare}
                 alt=""/>
         </div>
