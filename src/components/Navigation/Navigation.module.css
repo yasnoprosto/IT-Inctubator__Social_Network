@@ -1,0 +1,41 @@
+.navigation {
+    padding: 1vh 2vh;
+    background-color: #343434;
+    color: #E1E3E6;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.item {
+    padding-top: 1vh;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    padding: 3px;
+    margin: 5px 0px;
+
+}
+
+.item.active {
+    color: gold;
+}
+
+.item:hover {
+    background-color: rgba(216, 219, 223, 0.25);
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+}
+
+a:link {
+    color: #E1E3E6;
+}
+
+a:visited {
+    color: #E1E3E6;
+}
