@@ -1,3 +1,6 @@
 .container {
     padding: 2vh;
+    display: flex;
+    flex-direction: row;
+    color: #E1E3E6;
 }
