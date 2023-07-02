@@ -2,12 +2,13 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import avatarCat from "../../Avatar_cat.png";
 
-type PostPropsType = {
-    text: string
-    likesCount: number
+export type PostType = {
+    postId: string
+    postText: string
+    postLikesCount: number
 }
 
-export const Post = (props: PostPropsType) => {
+export const Post = (props: PostType) => {
         return (
             <div className={s.container}>
                 <div className={s.imgAndText}>
@@ -16,10 +17,10 @@ export const Post = (props: PostPropsType) => {
                         src={avatarCat}
                         alt="avatar"/>
                     <span className={s.item__text}>
-                    {props.text}
+                    {props.postText}
                 </span>
                 </div>
-                <div className={s.likeButton}>♥ {props.likesCount}</div>
+                <div className={s.likeButton}>♥ {props.postLikesCount}</div>
 
             </div>
         );

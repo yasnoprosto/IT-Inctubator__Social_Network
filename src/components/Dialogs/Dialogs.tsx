@@ -1,23 +1,38 @@
 import s from "./Dialogs.module.css";
-import {DialogUsers} from "./Dialog/DialogUsers";
-import {DialogMessages} from "./Dialog/DialogMessages";
+import {DialogType, DialogUsers} from "./Dialog/DialogUsers";
+import {DialogMessages, DialogMessagesType} from "./Dialog/DialogMessages";
+import {v1} from "uuid";
+import {message} from "antd";
+import {PostType} from "../Profile/MyPosts/Post";
+import React from "react";
 
-export const Dialogs = () => {
+type DialogsPropsType = {
+    dialogsUsers: DialogType[];
+    dialogsMessages: DialogMessagesType[];
+}
+
+export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+
+    const mappedDialogsUsers = props.dialogsUsers.map(u => {
+        return (
+            <DialogUsers userId={u.userId} userName={u.userName}/>
+        )
+    })
+
+
+    const mappedDialogsMessages = props.dialogsMessages.map(m => {
+        return (
+            <DialogMessages messageId={m.messageId} messageText={m.messageText}/>
+        )
+    })
+
     return (
         <div className={s.container}>
             <div>
-            <DialogUsers id={1} name={"Denis"}/>
-            <DialogUsers id={2} name={"Alex"}/>
-            <DialogUsers id={3} name={"Michael"}/>
-            <DialogUsers id={4} name={"Ludovic"}/>
-            <DialogUsers id={5} name={"Cinderella"}/>
+                {mappedDialogsUsers}
             </div>
             <div>
-                <DialogMessages message={"Hello"}/>
-                <DialogMessages message={"How are u "}/>
-                <DialogMessages message={"I love y'all"}/>
-                <DialogMessages message={"So..."}/>
-                <DialogMessages message={"Let's fun"}/>
+                {mappedDialogsMessages}
             </div>
         </div>
     );
