@@ -1,17 +1,28 @@
 import React from "react";
 import s from "./MyPosts.module.css";
-import {Post} from "./Post";
+import {Post, PostType} from "./Post";
+import {DialogMessagesType} from "../../Dialogs/Dialog/DialogMessages";
+import {v1} from "uuid";
 
-export const MyPosts = () => {
+type MyPostsPropsType = {
+    postsData: PostType[];
+}
+
+export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+
+        const mappedPostsData = props.postsData.map(p => {
+            return (
+                <Post postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
+            )
+        })
+
+
         return (
             <div className={s.container}>
                 <textarea className={s.textarea}/>
                 <button className={s.addPostButton}>Add post</button>
                 <div className={s.posts}>
-                   <Post likesCount={40} text={"Hello"}/>
-                   <Post likesCount={68} text={"I'm Learning React"}/>
-                   <Post likesCount={113} text={"My goal is to be React Developer"}/>
-                   <Post likesCount={104} text={"I love u!"}/>
+                    {mappedPostsData}
                 </div>
             </div>
         );

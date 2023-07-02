@@ -9,8 +9,17 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
+import {PostType} from "./components/Profile/MyPosts/Post";
+import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
+import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 
-const App = () => {
+type AppPropsType = {
+    postsData: PostType[];
+    dialogsUsers: DialogType[];
+    dialogsMessages: DialogMessagesType[];
+}
+
+const App: React.FC<AppPropsType> = (props) => {
     return (
         <BrowserRouter>
 
@@ -23,8 +32,8 @@ const App = () => {
                     <Navigation/>
                     <div className={"content"}>
                         <Routes>
-                            <Route path={"/profile"} element={<Profile/>}/>
-                            <Route path={"/dialogs"} element={<Dialogs/>}/>
+                            <Route path={"/profile"} element={<Profile postsData={props.postsData}/>}/>
+                            <Route path={"/dialogs"} element={<Dialogs dialogsMessages={props.dialogsMessages} dialogsUsers={props.dialogsUsers}/>}/>
                             <Route path={"/news"} element={<News/>}/>
                             <Route path={"/music"} element={<Music/>}/>
                             <Route path={"/settings"} element={<Settings/>}/>

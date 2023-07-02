@@ -2,19 +2,19 @@ import React from "react";
 import s from "./DialogUsers.module.css"
 import {NavLink} from "react-router-dom";
 
-type DialogType = {
-    name: string;
-    id: number;
+export type DialogType = {
+    userName: string;
+    userId: string;
 }
 
 export const DialogUsers = (props: DialogType) => {
-    const {name, id} = props
+    const {userName, userId} = props
 
-    const path = "" + id
+    const path = "" + userId
 
     return (
         <div className={s.container}>
-            <NavLink to={path} className={s.name}>{name}</NavLink>
+            <NavLink to={path} className={s.name}>{userName}</NavLink>
         </div>
     );
 };
