@@ -10,11 +10,11 @@ type MyPostsPropsType = {
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-        const mappedPostsData = props.postsData.map(p => {
+        const mappedPostsData = props.postsData.map((p, i) => {
             return (
-                <Post postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
-            )
-        })
+                <Post key={i} postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
+            );
+        });
 
 
         return (

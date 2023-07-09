@@ -13,13 +13,25 @@ import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 
+type AppStateType = {
+    state: AppPropsType
+}
+
 type AppPropsType = {
+    profileData: ProfileDataType
+    dialogsData: DialogsDataType
+}
+
+type ProfileDataType = {
     postsData: PostType[];
+}
+
+type DialogsDataType = {
     dialogsUsers: DialogType[];
     dialogsMessages: DialogMessagesType[];
 }
 
-const App: React.FC<AppPropsType> = (props) => {
+const App: React.FC<AppStateType> = (props) => {
     return (
         <BrowserRouter>
 
@@ -32,8 +44,8 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Navigation/>
                     <div className={"content"}>
                         <Routes>
-                            <Route path={"/profile"} element={<Profile postsData={props.postsData}/>}/>
-                            <Route path={"/dialogs"} element={<Dialogs dialogsMessages={props.dialogsMessages} dialogsUsers={props.dialogsUsers}/>}/>
+                            <Route path={"/profile"} element={<Profile profileData={props.state.profileData}/>}/>
+                            <Route path={"/dialogs"} element={<Dialogs dialogsData={props.state.dialogsData}/>}/>
                             <Route path={"/news"} element={<News/>}/>
                             <Route path={"/music"} element={<Music/>}/>
                             <Route path={"/settings"} element={<Settings/>}/>
