@@ -7,24 +7,28 @@ import {PostType} from "../Profile/MyPosts/Post";
 import React from "react";
 
 type DialogsPropsType = {
+    dialogsData: DialogsDataType
+}
+
+type DialogsDataType = {
     dialogsUsers: DialogType[];
     dialogsMessages: DialogMessagesType[];
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    const mappedDialogsUsers = props.dialogsUsers.map(u => {
+    const mappedDialogsUsers = props.dialogsData.dialogsUsers.map((u, i) => {
         return (
-            <DialogUsers userId={u.userId} userName={u.userName}/>
-        )
-    })
+            <DialogUsers key={i} userId={u.userId} userName={u.userName}/>
+        );
+    });
 
 
-    const mappedDialogsMessages = props.dialogsMessages.map(m => {
+    const mappedDialogsMessages = props.dialogsData.dialogsMessages.map((m, i) => {
         return (
-            <DialogMessages messageId={m.messageId} messageText={m.messageText}/>
-        )
-    })
+            <DialogMessages key={i} messageId={m.messageId} messageText={m.messageText}/>
+        );
+    });
 
     return (
         <div className={s.container}>
