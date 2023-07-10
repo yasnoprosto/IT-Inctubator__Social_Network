@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import avatar from "../../src/components/avatar_sidebar.png";
+import {rerenderEntireTree} from "../render";
 
 export const state = {
     profileData: {
@@ -25,4 +27,17 @@ export const state = {
             {messageId: v1(), messageText: "Let's fun"},
         ],
     },
+    sidebarData: {
+        friendsListData: [
+            {id: v1(), avatar: avatar, name: "Oleg"},
+            {id: v1(), avatar: avatar, name: "Mike"},
+            {id: v1(), avatar: avatar, name: "Stas"},
+        ]
+    }
+};
+
+export const addPost = (postText: string) => {
+    const newPost = {postId: v1(), postLikesCount: 0, postText: postText};
+    state.profileData.postsData.unshift(newPost);
+    rerenderEntireTree(state, addPost)
 };

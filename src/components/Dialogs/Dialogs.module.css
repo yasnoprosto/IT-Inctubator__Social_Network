@@ -4,3 +4,28 @@
     flex-direction: row;
     color: #E1E3E6;
 }
+
+.textarea {
+    display: flex;
+    justify-content: right;
+    width: 15vw;
+    margin-left: 15vw;
+}
+
+
+.chatContainer {
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+}
+
+.inputButtonContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.sendMessageButton {
+    width: 50px;
+    margin-left: 10px;
+}
