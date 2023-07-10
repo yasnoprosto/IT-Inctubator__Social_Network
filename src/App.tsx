@@ -12,24 +12,33 @@ import {News} from "./components/News/News";
 import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
+import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
 
-type AppStateType = {
-    state: AppPropsType
+export type AppStateType = {
+    state: AppStateDataType
+    addPost:(postText: string) => void
 }
 
-type AppPropsType = {
+
+export type AppStateDataType = {
     profileData: ProfileDataType
     dialogsData: DialogsDataType
+    sidebarData: SidebarDataType
 }
 
-type ProfileDataType = {
+export type ProfileDataType = {
     postsData: PostType[];
 }
 
-type DialogsDataType = {
+export type DialogsDataType = {
     dialogsUsers: DialogType[];
     dialogsMessages: DialogMessagesType[];
 }
+
+export type SidebarDataType = {
+    friendsListData: FriendsListDataType[]
+}
+
 
 const App: React.FC<AppStateType> = (props) => {
     return (
@@ -41,10 +50,10 @@ const App: React.FC<AppStateType> = (props) => {
                 </div>
 
                 <div className={"navigation_content_wrapper"}>
-                    <Navigation/>
+                    <Navigation sidebarData={props.state.sidebarData}/>
                     <div className={"content"}>
                         <Routes>
-                            <Route path={"/profile"} element={<Profile profileData={props.state.profileData}/>}/>
+                            <Route path={"/profile"} element={<Profile profileData={props.state.profileData} addPost={props.addPost}/>}/>
                             <Route path={"/dialogs"} element={<Dialogs dialogsData={props.state.dialogsData}/>}/>
                             <Route path={"/news"} element={<News/>}/>
                             <Route path={"/music"} element={<Music/>}/>
