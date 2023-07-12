@@ -13,10 +13,12 @@ import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
+import {updateNewPostText} from "./redux/state";
 
 export type AppStateType = {
     state: AppStateDataType
-    addPost:(postText: string) => void
+    addPost: () => void
+    updateNewPostText:(value: string) => void
 }
 
 
@@ -27,7 +29,8 @@ export type AppStateDataType = {
 }
 
 export type ProfileDataType = {
-    postsData: PostType[];
+    postsData: PostType[]
+    newPostText: string
 }
 
 export type DialogsDataType = {
@@ -53,7 +56,8 @@ const App: React.FC<AppStateType> = (props) => {
                     <Navigation sidebarData={props.state.sidebarData}/>
                     <div className={"content"}>
                         <Routes>
-                            <Route path={"/profile"} element={<Profile profileData={props.state.profileData} addPost={props.addPost}/>}/>
+                            <Route path={"/profile"}
+                                   element={<Profile profileData={props.state.profileData} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>}/>
                             <Route path={"/dialogs"} element={<Dialogs dialogsData={props.state.dialogsData}/>}/>
                             <Route path={"/news"} element={<News/>}/>
                             <Route path={"/music"} element={<Music/>}/>

@@ -1,5 +1,5 @@
 import {rerenderEntireTree} from "./render";
-import {addPost, state} from "./redux/state";
+import {addPost, updateNewPostText, state} from "./redux/state";
 
 
-rerenderEntireTree(state, addPost);
+rerenderEntireTree(state, addPost, updateNewPostText);
