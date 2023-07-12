@@ -30,6 +30,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             props.updateNewPostText(e.currentTarget.value)
         };
 
+    console.log(props);
         return (
             <div className={s.container}>
                 <textarea onChange={onChangeHandler} ref={inputRef} className={s.textarea} value={props.profileData.newPostText}/>
