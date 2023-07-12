@@ -1,7 +1,10 @@
 import {v1} from "uuid";
 import avatar from "../../src/components/avatar_sidebar.png";
-import {rerenderEntireTree} from "../render";
 
+
+let renderTree = () => {
+    console.log("State was changed");
+};
 
 
 export const state = {
@@ -75,6 +78,7 @@ export const state = {
                 messageText: "Let's fun"
             },
         ],
+        newMessageText: ""
     },
     sidebarData: {
         friendsListData: [
@@ -102,12 +106,33 @@ export const addPost = () => {
         postLikesCount: 0,
         postText: state.profileData.newPostText
     };
-    state.profileData.postsData.unshift(newPost);
+    state.profileData.postsData.push(newPost)
     state.profileData.newPostText = "";
-    rerenderEntireTree(state, addPost, updateNewPostText);
+    renderTree();
 };
 
 export const updateNewPostText = (value: string) => {
     state.profileData.newPostText = value;
-    rerenderEntireTree(state, addPost, updateNewPostText);
+    renderTree();
 };
+
+
+export const addMessage = () => {
+    const newMessage = {
+        messageId: v1(),
+        messageText: state.dialogsData.newMessageText
+    };
+    state.dialogsData.dialogsMessages.push(newMessage);
+    state.dialogsData.newMessageText = "";
+    renderTree();
+};
+
+
+export const updateNewMessageText = (value: string) => {
+    state.dialogsData.newMessageText = value;
+    renderTree();
+};
+
+export const subscribe = (observer: () => void) => {
+    renderTree = observer
+}
