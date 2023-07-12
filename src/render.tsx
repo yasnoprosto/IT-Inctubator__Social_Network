@@ -1,10 +1,9 @@
 import ReactDOM from "react-dom";
 import App, {AppStateDataType} from "./App";
-import React from "react";
 
-export const rerenderEntireTree = (state: AppStateDataType, addPost:(postText: string) => void) => {
+export const rerenderEntireTree = (state: AppStateDataType, addPost:() => void, updateNewPostText:(value: string) => void) => {
     ReactDOM.render(
-        <App state={state} addPost={addPost}/>,
+        <App state={state} addPost={addPost} updateNewPostText={updateNewPostText}/>,
         document.getElementById("root")
     );
 }
