@@ -13,8 +13,15 @@ import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
+import {StoreType} from "./redux/state";
 
-export type AppStateType = {
+// type AppPropsType = {
+//     store: StoreType
+// };
+
+
+
+export type AppStoreDataType = {
     state: AppStateDataType
     addPost: () => void
     updateNewPostText: (value: string) => void
@@ -45,7 +52,8 @@ export type SidebarDataType = {
 }
 
 
-const App: React.FC<AppStateType> = (props) => {
+const App: React.FC<AppStoreDataType> = (props) => {
+    console.log(props);
     return (
         <BrowserRouter>
 
