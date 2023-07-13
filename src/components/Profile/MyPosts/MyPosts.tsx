@@ -20,13 +20,16 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         const inputRef = useRef<HTMLTextAreaElement>(null);
 
     const addPost = () => {
+        debugger
         const postText = inputRef.current?.value
         if(postText) {
+            console.log(props);
         props.addPost();
         }
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        debugger
             props.updateNewPostText(e.currentTarget.value)
         };
 

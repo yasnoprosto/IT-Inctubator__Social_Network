@@ -1,12 +1,12 @@
 import ReactDOM from "react-dom";
 import App from "./App";
-import {addMessage, addPost, state, subscribe, updateNewMessageText, updateNewPostText} from "./redux/state";
+import {store} from "./redux/state";
 
 
 
 export const renderTree = (): void => {
     ReactDOM.render(
-        <App state={state} addPost={addPost} updateNewPostText={updateNewPostText} addMessage={addMessage} updateNewMessageText={updateNewMessageText}/>,
+        <App state={store.getState()} addPost={store.addPost.bind(store)} updateNewPostText={store.updateNewPostText.bind(store)} addMessage={store.addMessage.bind(store)} updateNewMessageText={store.updateNewMessageText.bind(store)}/>,
         document.getElementById("root")
     );
 };
@@ -14,4 +14,4 @@ export const renderTree = (): void => {
 renderTree();
 
 
-subscribe(renderTree);
+store.subscribe(renderTree);
