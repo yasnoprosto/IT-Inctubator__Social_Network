@@ -13,7 +13,8 @@ export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div className={s.container}>
             <ProfileInfo/>
-            <MyPosts profileData={props.profileData} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
+            <MyPosts profileData={props.profileData} addPost={props.addPost}
+                     updateNewPostText={props.updateNewPostText}/>
         </div>
     );
 };

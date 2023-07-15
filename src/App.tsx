@@ -56,7 +56,6 @@ const App: React.FC<AppStoreDataType> = (props) => {
     console.log(props);
     return (
         <BrowserRouter>
-
             <div className={"app-wrapper"}>
                 <div className={"header"}>
                     <Header/>

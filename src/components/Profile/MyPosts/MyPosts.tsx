@@ -5,8 +5,8 @@ import {ProfileDataType} from "../../../App";
 
 type MyPostsPropsType = {
     profileData: ProfileDataType;
-    addPost:() => void
-    updateNewPostText:(value: string) => void
+    addPost: () => void
+    updateNewPostText: (value: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -19,24 +19,25 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
         const inputRef = useRef<HTMLTextAreaElement>(null);
 
-    const addPost = () => {
-        debugger
-        const postText = inputRef.current?.value
-        if(postText) {
-            console.log(props);
-        props.addPost();
-        }
-    };
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger
-            props.updateNewPostText(e.currentTarget.value)
+        const addPost = () => {
+            debugger
+            const postText = inputRef.current?.value;
+            if (postText) {
+                console.log(props);
+                props.addPost();
+            }
         };
 
-    console.log(props);
+        const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+            debugger
+            props.updateNewPostText(e.currentTarget.value);
+        };
+
+        console.log(props);
         return (
             <div className={s.container}>
-                <textarea onChange={onChangeHandler} ref={inputRef} className={s.textarea} value={props.profileData.newPostText}/>
+                <textarea onChange={onChangeHandler} ref={inputRef} className={s.textarea}
+                          value={props.profileData.newPostText}/>
                 <button onClick={addPost} className={s.addPostButton}>Add post
                 </button>
                 <div className={s.posts}>
