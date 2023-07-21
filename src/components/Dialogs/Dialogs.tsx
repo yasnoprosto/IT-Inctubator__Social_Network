@@ -3,11 +3,11 @@ import {DialogUsers} from "./Dialog/DialogUsers";
 import {DialogMessages} from "./Dialog/DialogMessages";
 import React, {ChangeEvent} from "react";
 import {DialogsDataType} from "../../App";
+import {ActionsType} from "../../redux/state";
 
 type DialogsPropsType = {
     dialogsData: DialogsDataType
-    addMessage: () => void
-    updateNewMessageText: (value: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -27,14 +27,15 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     const onClickHandler = () => {
         if(props.dialogsData.newMessageText.trim()) {
-        props.addMessage()
+            const action = {type: "ADD-MESSAGE"};
+            props.dispatch(action)
         }
     };
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageText(e.currentTarget.value)
+        const action = {type: "UPDATE-NEW-MESSAGE-TEXT", value: e.currentTarget.value};
+        props.dispatch(action)
     };
-
 
 
 

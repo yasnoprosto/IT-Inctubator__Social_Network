@@ -2,11 +2,11 @@ import React, {ChangeEvent, useRef} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post";
 import {ProfileDataType} from "../../../App";
+import {ActionsType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     profileData: ProfileDataType;
-    addPost: () => void
-    updateNewPostText: (value: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -24,13 +24,15 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             const postText = inputRef.current?.value;
             if (postText) {
                 console.log(props);
-                props.addPost();
+                const action = {type: "ADD-POST"};
+                props.dispatch(action);
             }
         };
 
         const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
             debugger
-            props.updateNewPostText(e.currentTarget.value);
+            const action = {type: "UPDATE-NEW-POST-TEXT", value: e.currentTarget.value};
+            props.dispatch(action);
         };
 
         console.log(props);
