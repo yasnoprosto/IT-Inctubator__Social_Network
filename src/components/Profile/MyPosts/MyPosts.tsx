@@ -2,7 +2,7 @@ import React, {ChangeEvent, useRef} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post";
 import {ProfileDataType} from "../../../App";
-import {ActionsType} from "../../../redux/state";
+import {ActionsType, addPostAC, updateNewPostAC} from "../../../redux/state";
 
 type MyPostsPropsType = {
     profileData: ProfileDataType;
@@ -24,15 +24,13 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             const postText = inputRef.current?.value;
             if (postText) {
                 console.log(props);
-                const action = {type: "ADD-POST"};
-                props.dispatch(action);
+                props.dispatch(addPostAC());
             }
         };
 
         const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
             debugger
-            const action = {type: "UPDATE-NEW-POST-TEXT", value: e.currentTarget.value};
-            props.dispatch(action);
+            props.dispatch(updateNewPostAC(e.currentTarget.value));
         };
 
         console.log(props);

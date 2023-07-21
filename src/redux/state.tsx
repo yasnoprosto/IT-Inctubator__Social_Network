@@ -2,7 +2,17 @@ import {v1} from "uuid";
 import avatar from "../../src/components/avatar_sidebar.png";
 import {AppStateDataType} from "../App";
 
-export type ActionsType = any
+export type addPostAT = ReturnType<typeof addPostAC>
+export type updateNewPostAT = ReturnType<typeof updateNewPostAC>
+export type addMessageAT = ReturnType<typeof addMessageAC>
+export type updateNewMessageAT = ReturnType<typeof updateNewMessageAC>
+
+export const ADD_POST = "ADD-POST";
+export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+export const ADD_MESSAGE = "ADD-MESSAGE";
+export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+
+export type ActionsType = updateNewPostAT | addPostAT | addMessageAT | updateNewMessageAT
 
 export type StoreType = {
     _state: AppStateDataType
@@ -146,9 +156,10 @@ export const store: StoreType = {
     //     this._callSubscriber();
     // },
 
-    dispatch(action) {
+    dispatch(action: ActionsType) {
+        debugger
         switch (action.type) {
-            case "ADD-POST": {
+            case ADD_POST: {
                 const newPost = {
                     postId: v1(),
                     postLikesCount: 0,
@@ -159,12 +170,12 @@ export const store: StoreType = {
                 this._callSubscriber();
                 break;
             }
-            case "UPDATE-NEW-POST-TEXT": {
+            case UPDATE_NEW_POST_TEXT: {
                 this._state.profileData.newPostText = action.value;
                 this._callSubscriber();
                 break;
             }
-            case "ADD-MESSAGE": {
+            case ADD_MESSAGE: {
                 const newMessage = {
                     messageId: v1(),
                     messageText: this._state.dialogsData.newMessageText
@@ -174,11 +185,33 @@ export const store: StoreType = {
                 this._callSubscriber();
                 break;
             }
-            case "UPDATE-NEW-MESSAGE-TEXT": {
+            case UPDATE_NEW_MESSAGE_TEXT: {
                 this._state.dialogsData.newMessageText = action.value;
                 this._callSubscriber();
-                break
+                break;
             }
         }
     }
+};
+
+export const addPostAC = () => {
+    return {type: ADD_POST} as const;
+};
+
+export const updateNewPostAC = (value: string) => {
+    return {
+        type: UPDATE_NEW_POST_TEXT,
+        value: value
+    } as const;
+};
+
+export const addMessageAC = () => {
+    return {type: ADD_MESSAGE} as const;
+};
+
+export const updateNewMessageAC = (value: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        value: value
+    } as const;
 };
