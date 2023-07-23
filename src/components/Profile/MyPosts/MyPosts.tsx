@@ -1,8 +1,9 @@
-import React, {ChangeEvent, useRef} from "react";
+import React, {ChangeEvent, KeyboardEvent, useRef} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post";
 import {ProfileDataType} from "../../../App";
-import {ActionsType, addPostAC, updateNewPostAC} from "../../../redux/state";
+import {ActionsType} from "../../../redux/state";
+import {addPostAC, updateNewPostAC} from "../../../redux/reducers/profile-reducer";
 
 type MyPostsPropsType = {
     profileData: ProfileDataType;
@@ -20,23 +21,27 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         const inputRef = useRef<HTMLTextAreaElement>(null);
 
         const addPost = () => {
-            debugger
             const postText = inputRef.current?.value;
             if (postText) {
-                console.log(props);
                 props.dispatch(addPostAC());
             }
         };
 
+    const onKeyUpHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.key === "Enter") {
+            if(props.profileData.newPostText.trim()) {
+                props.dispatch(addPostAC());
+            }
+        }
+    }
+
         const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            debugger
             props.dispatch(updateNewPostAC(e.currentTarget.value));
         };
 
-        console.log(props);
         return (
             <div className={s.container}>
-                <textarea onChange={onChangeHandler} ref={inputRef} className={s.textarea}
+                <textarea onKeyUp={onKeyUpHandler} onChange={onChangeHandler} ref={inputRef} className={s.textarea}
                           value={props.profileData.newPostText}/>
                 <button onClick={addPost} className={s.addPostButton}>Add post
                 </button>

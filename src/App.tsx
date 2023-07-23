@@ -13,7 +13,7 @@ import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
-import {ActionsType, StoreType} from "./redux/state";
+import {ActionsType} from "./redux/state";
 
 // type AppPropsType = {
 //     store: StoreType
@@ -50,7 +50,6 @@ export type SidebarDataType = {
 
 
 const App: React.FC<AppStoreDataType> = (props) => {
-    console.log(props);
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>

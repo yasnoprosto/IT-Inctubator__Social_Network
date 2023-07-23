@@ -13,12 +13,24 @@ export const dialogsReducer = (state: any, action: any) => {
             };
             state.dialogsMessages.push(newMessage);
             state.newMessageText = "";
-            break;
+            return state;
         }
         case UPDATE_NEW_MESSAGE_TEXT: {
             state.newMessageText = action.value;
-            break;
+            return state;
         }
+        default:
+            return state;
     }
-    return state
+};
+
+export const addMessageAC = () => {
+    return {type: ADD_MESSAGE} as const;
+};
+
+export const updateNewMessageAC = (value: string) => {
+    return {
+        type: UPDATE_NEW_MESSAGE_TEXT,
+        value: value
+    } as const;
 };

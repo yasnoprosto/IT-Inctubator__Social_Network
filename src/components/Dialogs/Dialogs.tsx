@@ -1,9 +1,10 @@
 import s from "./Dialogs.module.css";
 import {DialogUsers} from "./Dialog/DialogUsers";
 import {DialogMessages} from "./Dialog/DialogMessages";
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import {DialogsDataType} from "../../App";
-import {ActionsType, addMessageAC, updateNewMessageAC} from "../../redux/state";
+import {ActionsType} from "../../redux/state";
+import {addMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogs-reducer";
 
 type DialogsPropsType = {
     dialogsData: DialogsDataType
@@ -36,6 +37,14 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         props.dispatch(updateNewMessageAC(e.currentTarget.value))
     };
 
+    const onKeyUpHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.key === "Enter") {
+            if(props.dialogsData.newMessageText.trim()) {
+                props.dispatch(addMessageAC())
+            }
+        }
+    }
+
 
 
     return (
@@ -46,7 +55,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             <div className={s.chatContainer}>
                 {mappedDialogsMessages}
                 <div className={s.inputButtonContainer}>
-                    <textarea onChange={onChangeHandler} className={s.textarea} value={props.dialogsData.newMessageText}></textarea>
+                    <textarea onKeyUp={onKeyUpHandler} onChange={onChangeHandler} className={s.textarea} value={props.dialogsData.newMessageText}></textarea>
                     <span>
                 <button onClick={onClickHandler} className={s.sendMessageButton}>SEND</button>
                 </span>
