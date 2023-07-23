@@ -1,16 +1,15 @@
 import {v1} from "uuid";
 import avatar from "../../src/components/avatar_sidebar.png";
 import {AppStateDataType} from "../App";
+import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "./reducers/profile-reducer";
+import {sidebarReducer} from "./reducers/sidebar-reducer";
+import {profileReducer} from "./reducers/profile-reducer";
+import {dialogsReducer} from "./reducers/dialogs-reducer";
 
 export type addPostAT = ReturnType<typeof addPostAC>
 export type updateNewPostAT = ReturnType<typeof updateNewPostAC>
 export type addMessageAT = ReturnType<typeof addMessageAC>
 export type updateNewMessageAT = ReturnType<typeof updateNewMessageAC>
-
-export const ADD_POST = "ADD-POST";
-export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
-export const ADD_MESSAGE = "ADD-MESSAGE";
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export type ActionsType = updateNewPostAT | addPostAT | addMessageAT | updateNewMessageAT
 
@@ -158,52 +157,21 @@ export const store: StoreType = {
 
     dispatch(action: ActionsType) {
         debugger
-        switch (action.type) {
-            case ADD_POST: {
-                const newPost = {
-                    postId: v1(),
-                    postLikesCount: 0,
-                    postText: this._state.profileData.newPostText
-                };
-                this._state.profileData.postsData.push(newPost);
-                this._state.profileData.newPostText = "";
-                this._callSubscriber();
-                break;
-            }
-            case UPDATE_NEW_POST_TEXT: {
-                this._state.profileData.newPostText = action.value;
-                this._callSubscriber();
-                break;
-            }
-            case ADD_MESSAGE: {
-                const newMessage = {
-                    messageId: v1(),
-                    messageText: this._state.dialogsData.newMessageText
-                };
-                this._state.dialogsData.dialogsMessages.push(newMessage);
-                this._state.dialogsData.newMessageText = "";
-                this._callSubscriber();
-                break;
-            }
-            case UPDATE_NEW_MESSAGE_TEXT: {
-                this._state.dialogsData.newMessageText = action.value;
-                this._callSubscriber();
-                break;
-            }
-        }
+        this._state.profileData = profileReducer(this._state.profileData, action)
+        this._state.dialogsData = dialogsReducer(this._state.dialogsData, action)
+        this._state.sidebarData = sidebarReducer(this._state.sidebarData, action)
+
+        this._callSubscriber()
     }
-};
+}
 
-export const addPostAC = () => {
-    return {type: ADD_POST} as const;
-};
+export const  addPostAC = () => {
+    return {type: "ADD-POST"} as const
+}
 
-export const updateNewPostAC = (value: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        value: value
-    } as const;
-};
+export const  updateNewPostAC = (value: string) => {
+    return {type: "UPDATE-NEW-POST-TEXT", value: value} as const
+}
 
 export const addMessageAC = () => {
     return {type: ADD_MESSAGE} as const;
