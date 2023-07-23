@@ -5,7 +5,6 @@ export const ADD_MESSAGE = "ADD-MESSAGE";
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export const profileReducer  = (state: any, action: any) => {
-    debugger
     switch (action.type) {
         case ADD_POST: {
             const newPost = {
@@ -15,12 +14,20 @@ export const profileReducer  = (state: any, action: any) => {
             };
             state.postsData.push(newPost);
             state.newPostText = "";
-            break;
+            return state
         }
         case UPDATE_NEW_POST_TEXT: {
             state.newPostText = action.value;
-            break;
+            return state
         }
+        default: return state
     }
-    return state
 };
+
+export const  addPostAC = () => {
+    return {type: "ADD-POST"} as const
+}
+
+export const  updateNewPostAC = (value: string) => {
+    return {type: "UPDATE-NEW-POST-TEXT", value: value} as const
+}

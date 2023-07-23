@@ -1,10 +1,10 @@
 import {v1} from "uuid";
 import avatar from "../../src/components/avatar_sidebar.png";
 import {AppStateDataType} from "../App";
-import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "./reducers/profile-reducer";
+import {addPostAC, updateNewPostAC} from "./reducers/profile-reducer";
 import {sidebarReducer} from "./reducers/sidebar-reducer";
 import {profileReducer} from "./reducers/profile-reducer";
-import {dialogsReducer} from "./reducers/dialogs-reducer";
+import {addMessageAC, dialogsReducer, updateNewMessageAC} from "./reducers/dialogs-reducer";
 
 export type addPostAT = ReturnType<typeof addPostAC>
 export type updateNewPostAT = ReturnType<typeof updateNewPostAC>
@@ -116,7 +116,6 @@ export const store: StoreType = {
         }
     },
     _callSubscriber() {
-        console.log("State was changed");
     },
 
     getState() {
@@ -156,30 +155,10 @@ export const store: StoreType = {
     // },
 
     dispatch(action: ActionsType) {
-        debugger
-        this._state.profileData = profileReducer(this._state.profileData, action)
-        this._state.dialogsData = dialogsReducer(this._state.dialogsData, action)
-        this._state.sidebarData = sidebarReducer(this._state.sidebarData, action)
+        this._state.profileData = profileReducer(this._state.profileData, action);
+        this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
+        this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);
 
-        this._callSubscriber()
+        this._callSubscriber();
     }
-}
-
-export const  addPostAC = () => {
-    return {type: "ADD-POST"} as const
-}
-
-export const  updateNewPostAC = (value: string) => {
-    return {type: "UPDATE-NEW-POST-TEXT", value: value} as const
-}
-
-export const addMessageAC = () => {
-    return {type: ADD_MESSAGE} as const;
-};
-
-export const updateNewMessageAC = (value: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        value: value
-    } as const;
 };
