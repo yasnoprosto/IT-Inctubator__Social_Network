@@ -1,12 +1,58 @@
 import {v1} from "uuid";
-import {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "./profile-reducer";
+import {DialogsDataType} from "../../App";
 
-export const ADD_POST = "ADD-POST";
-export const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-export const dialogsReducer = (state: any, action: any) => {
+const initialState: DialogsDataType = {
+    dialogsUsers: [
+        {
+            userId: v1(),
+            userName: "Denis"
+        },
+        {
+            userId: v1(),
+            userName: "Alex"
+        },
+        {
+            userId: v1(),
+            userName: "Michael"
+        },
+        {
+            userId: v1(),
+            userName: "Ludovic"
+        },
+        {
+            userId: v1(),
+            userName: "Cinderella"
+        }
+    ],
+    dialogsMessages: [
+        {
+            messageId: v1(),
+            messageText: "Hello"
+        },
+        {
+            messageId: v1(),
+            messageText: "How are u?"
+        },
+        {
+            messageId: v1(),
+            messageText: "I love y'all"
+        },
+        {
+            messageId: v1(),
+            messageText: "Hello"
+        },
+        {
+            messageId: v1(),
+            messageText: "Let's fun"
+        },
+    ],
+    newMessageText: ""
+}
+
+export const dialogsReducer = (state: DialogsDataType = initialState, action: any) => {
     switch (action.type) {
-        case ADD_MESSAGE: {
+        case "ADD-MESSAGE": {
             const newMessage = {
                 messageId: v1(),
                 messageText: state.newMessageText
@@ -15,7 +61,7 @@ export const dialogsReducer = (state: any, action: any) => {
             state.newMessageText = "";
             return state;
         }
-        case UPDATE_NEW_MESSAGE_TEXT: {
+        case "UPDATE-NEW-MESSAGE-TEXT": {
             state.newMessageText = action.value;
             return state;
         }
@@ -24,13 +70,17 @@ export const dialogsReducer = (state: any, action: any) => {
     }
 };
 
+export type AddMessageActionType = ReturnType<typeof addMessageAC>
+
 export const addMessageAC = () => {
-    return {type: ADD_MESSAGE} as const;
+    return {type: "ADD-MESSAGE"};
 };
+
+export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 
 export const updateNewMessageAC = (value: string) => {
     return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
+        type: "UPDATE-NEW-MESSAGE-TEXT",
         value: value
-    } as const;
+    };
 };

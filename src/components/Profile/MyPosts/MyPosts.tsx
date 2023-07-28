@@ -2,8 +2,8 @@ import React, {ChangeEvent, KeyboardEvent, useRef} from "react";
 import s from "./MyPosts.module.css";
 import {Post} from "./Post";
 import {ProfileDataType} from "../../../App";
-import {ActionsType} from "../../../redux/state";
-import {addPostAC, updateNewPostAC} from "../../../redux/reducers/profile-reducer";
+import {ActionsType} from "../../../redux/store";
+import {addPostAC, updateNewPostTextAC} from "../../../redux/reducers/profile-reducer";
 
 type MyPostsPropsType = {
     profileData: ProfileDataType;
@@ -36,7 +36,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     }
 
         const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            props.dispatch(updateNewPostAC(e.currentTarget.value));
+            props.dispatch(updateNewPostTextAC(e.currentTarget.value));
         };
 
         return (

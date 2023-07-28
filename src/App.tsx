@@ -13,7 +13,7 @@ import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
-import {ActionsType} from "./redux/state";
+import {ActionsType, StoreType} from "./redux/store";
 
 // type AppPropsType = {
 //     store: StoreType
@@ -23,6 +23,7 @@ import {ActionsType} from "./redux/state";
 
 export type AppStoreDataType = {
     state: AppStateDataType
+    store: StoreType
     dispatch: (action: ActionsType) => void
 }
 

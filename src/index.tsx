@@ -1,16 +1,19 @@
 import ReactDOM from "react-dom";
-import App from "./App";
-import {store} from "./redux/state";
+import App, {AppStateDataType} from "./App";
+import {store} from "./redux/store";
 
 
-export const renderTree = (): void => {
+export const renderTree = (state: AppStateDataType): void => {
     ReactDOM.render(
-        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>,
+        <App state={state} store={store} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById("root")
     );
 };
 
-renderTree();
+renderTree(store.getState());
 
 
-store.subscribe(renderTree);
+store.subscribe(() => {
+    const state = store.getState()
+    renderTree(state)
+});
