@@ -1,15 +1,22 @@
 import {v1} from "uuid";
 import avatar from "../../src/components/avatar_sidebar.png";
 import {AppStateDataType} from "../App";
-import {addPostAC, updateNewPostAC} from "./reducers/profile-reducer";
+import {
+    AddPostActionType,
+    UpdateNewPostTextActionType
+} from "./reducers/profile-reducer";
 import {sidebarReducer} from "./reducers/sidebar-reducer";
 import {profileReducer} from "./reducers/profile-reducer";
-import {addMessageAC, dialogsReducer, updateNewMessageAC} from "./reducers/dialogs-reducer";
+import {
+    AddMessageActionType,
+    dialogsReducer,
+    UpdateNewMessageActionType
+} from "./reducers/dialogs-reducer";
 
-export type addPostAT = ReturnType<typeof addPostAC>
-export type updateNewPostAT = ReturnType<typeof updateNewPostAC>
-export type addMessageAT = ReturnType<typeof addMessageAC>
-export type updateNewMessageAT = ReturnType<typeof updateNewMessageAC>
+export type addPostAT = AddPostActionType
+export type updateNewPostAT = UpdateNewPostTextActionType
+export type addMessageAT = AddMessageActionType
+export type updateNewMessageAT = UpdateNewMessageActionType
 
 export type ActionsType = updateNewPostAT | addPostAT | addMessageAT | updateNewMessageAT
 

@@ -1,33 +1,71 @@
 import {v1} from "uuid";
-import {ADD_POST, UPDATE_NEW_POST_TEXT} from "./dialogs-reducer";
+import {ProfileDataType} from "../../App";
 
-export const ADD_MESSAGE = "ADD-MESSAGE";
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+const initialState: ProfileDataType = {
+    postsData: [
+        {
+            postId: v1(),
+            postLikesCount: 40,
+            postText: "Hello"
+        },
+        {
+            postId: v1(),
+            postLikesCount: 68,
+            postText: "I'm Learning React"
+        },
+        {
+            postId: v1(),
+            postLikesCount: 113,
+            postText: "My goal is to be React Developer"
+        },
+        {
+            postId: v1(),
+            postLikesCount: 104,
+            postText: "I love u!"
+        },
+    ],
+    newPostText: ""
+}
 
-export const profileReducer  = (state: any, action: any) => {
+
+export const profileReducer = (state: ProfileDataType = initialState, action: any) => {
     switch (action.type) {
-        case ADD_POST: {
+        case "ADD-POST": {
             const newPost = {
                 postId: v1(),
                 postLikesCount: 0,
                 postText: state.newPostText
             };
-            state.postsData.push(newPost);
+            state.postsData.unshift(newPost);
             state.newPostText = "";
-            return state
+            return state;
         }
-        case UPDATE_NEW_POST_TEXT: {
+        case "UPDATE-NEW-POST-TEXT": {
             state.newPostText = action.value;
-            return state
+            return state;
         }
-        default: return state
+        default:
+            return state;
     }
 };
 
-export const  addPostAC = () => {
-    return {type: "ADD-POST"} as const
-}
+export type AddPostActionType = {
+    type: string
+};
 
-export const  updateNewPostAC = (value: string) => {
-    return {type: "UPDATE-NEW-POST-TEXT", value: value} as const
-}
+export const addPostAC = (): AddPostActionType => {
+    return {type: "ADD-POST"}
+};
+
+export type UpdateNewPostTextActionType = {
+    type: string
+    value: string
+};
+
+
+export const updateNewPostTextAC = (value: string): UpdateNewPostTextActionType => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        value: value
+    }
+};

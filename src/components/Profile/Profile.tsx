@@ -3,7 +3,7 @@ import s from "./Profile.module.css";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfileDataType} from "../../App";
-import {ActionsType} from "../../redux/state";
+import {ActionsType} from "../../redux/store";
 
 type ProfilePropsType = {
     profileData: ProfileDataType
