@@ -1,10 +1,5 @@
 import s from "./Dialogs.module.css";
-import {DialogUsers} from "./Dialog/DialogUsers";
-import {DialogMessages} from "./Dialog/DialogMessages";
 import React, {ChangeEvent, KeyboardEvent} from "react";
-import {DialogsDataType} from "../../App";
-import {ActionsType} from "../../redux/store";
-import {addMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogs-reducer";
 
 type DialogsPropsType = {
     newMessageText: string
