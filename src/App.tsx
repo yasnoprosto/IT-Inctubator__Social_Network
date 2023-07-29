@@ -4,7 +4,6 @@ import {Navigation} from "./components/Navigation/Navigation";
 import {Footer} from "./components/Footer/Footer";
 import {Profile} from "./components/Profile/Profile";
 import {Header} from "./components/Header/Header";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Settings} from "./components/Settings/Settings";
 import {Music} from "./components/Music/Music";
@@ -14,10 +13,7 @@ import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
 import {ActionsType, StoreType} from "./redux/store";
-
-// type AppPropsType = {
-//     store: StoreType
-// };
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 
@@ -63,9 +59,9 @@ const App: React.FC<AppStoreDataType> = (props) => {
                     <div className={"content"}>
                         <Routes>
                             <Route path={"/profile"}
-                                   element={<Profile profileData={props.state.profileData} dispatch={props.dispatch}/>}/>
+                                   element={<Profile store={props.store}/>}/>
                             <Route path={"/dialogs"}
-                                   element={<Dialogs dialogsData={props.state.dialogsData} dispatch={props.dispatch}/>}/>
+                                   element={<DialogsContainer store={props.store}/>}/>
                             <Route path={"/news"} element={<News/>}/>
                             <Route path={"/music"} element={<Music/>}/>
                             <Route path={"/settings"} element={<Settings/>}/>
