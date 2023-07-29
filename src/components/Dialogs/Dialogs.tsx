@@ -7,57 +7,32 @@ import {ActionsType} from "../../redux/store";
 import {addMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogs-reducer";
 
 type DialogsPropsType = {
-    dialogsData: DialogsDataType
-    dispatch: (action: ActionsType) => void
+    newMessageText: string
+    mappedDialogsUsers: JSX.Element[]
+    mappedDialogsMessages: JSX.Element[]
+    onKeyUpCallback: (e: KeyboardEvent<HTMLTextAreaElement>) => void
+    onChangeCallback: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    onClickCallback: () => void
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    const mappedDialogsUsers = props.dialogsData.dialogsUsers.map((u, i) => {
-        return (
-            <DialogUsers key={i} userId={u.userId} userName={u.userName}/>
-        );
-    });
-
-
-    const mappedDialogsMessages = props.dialogsData.dialogsMessages.map((m, i) => {
-        return (
-            <DialogMessages key={i} messageId={m.messageId} messageText={m.messageText}/>
-        );
-    });
-
-    const onClickHandler = () => {
-        if(props.dialogsData.newMessageText.trim()) {
-
-            props.dispatch(addMessageAC())
-        }
-    };
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageAC(e.currentTarget.value))
-    };
-
-    const onKeyUpHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if(e.key === "Enter") {
-            if(props.dialogsData.newMessageText.trim()) {
-                props.dispatch(addMessageAC())
-            }
-        }
-    }
-
-
-
     return (
         <div className={s.container}>
             <div>
-                {mappedDialogsUsers}
+                {props.mappedDialogsUsers}
             </div>
             <div className={s.chatContainer}>
-                {mappedDialogsMessages}
+                {props.mappedDialogsMessages}
                 <div className={s.inputButtonContainer}>
-                    <textarea onKeyUp={onKeyUpHandler} onChange={onChangeHandler} className={s.textarea} value={props.dialogsData.newMessageText}></textarea>
+                    <textarea
+                        onKeyUp={(e) => props.onKeyUpCallback(e)}
+                        onChange={(e) => props.onChangeCallback(e)}
+                        className={s.textarea}
+                        value={props.newMessageText}></textarea>
                     <span>
-                <button onClick={onClickHandler} className={s.sendMessageButton}>SEND</button>
+                <button onClick={props.onClickCallback}
+                        className={s.sendMessageButton}>SEND</button>
                 </span>
                 </div>
             </div>

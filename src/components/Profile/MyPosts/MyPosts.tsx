@@ -1,52 +1,27 @@
-import React, {ChangeEvent, KeyboardEvent, useRef} from "react";
+import React, {ChangeEvent, KeyboardEvent, RefObject} from "react";
 import s from "./MyPosts.module.css";
-import {Post} from "./Post";
-import {ProfileDataType} from "../../../App";
-import {ActionsType} from "../../../redux/store";
-import {addPostAC, updateNewPostTextAC} from "../../../redux/reducers/profile-reducer";
 
 type MyPostsPropsType = {
-    profileData: ProfileDataType;
-    dispatch: (action: ActionsType) => void
+    mappedPosts: JSX.Element[]
+    newPostText: string
+    addPostCallback: () => void
+    onKeyUpCallback: (e: KeyboardEvent<HTMLTextAreaElement>) => void
+    onChangeCallback: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    inputRef: RefObject<HTMLTextAreaElement>
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-        const mappedPostsData = props.profileData.postsData.map((p, i) => {
-            return (
-                <Post key={i} postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
-            );
-        });
-
-        const inputRef = useRef<HTMLTextAreaElement>(null);
-
-        const addPost = () => {
-            const postText = inputRef.current?.value;
-            if (postText) {
-                props.dispatch(addPostAC());
-            }
-        };
-
-    const onKeyUpHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if(e.key === "Enter") {
-            if(props.profileData.newPostText.trim()) {
-                props.dispatch(addPostAC());
-            }
-        }
-    }
-
-        const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            props.dispatch(updateNewPostTextAC(e.currentTarget.value));
-        };
-
         return (
             <div className={s.container}>
-                <textarea onKeyUp={onKeyUpHandler} onChange={onChangeHandler} ref={inputRef} className={s.textarea}
-                          value={props.profileData.newPostText}/>
-                <button onClick={addPost} className={s.addPostButton}>Add post
+                <textarea onKeyUp={(e) => props.onKeyUpCallback(e)}
+                          onChange={(e) => props.onChangeCallback(e)}
+                          className={s.textarea}
+                          value={props.newPostText}/>
+                <button onClick={props.addPostCallback} className={s.addPostButton}>Add post
                 </button>
                 <div className={s.posts}>
-                    {mappedPostsData}
+                    {props.mappedPosts}
                 </div>
             </div>
         );

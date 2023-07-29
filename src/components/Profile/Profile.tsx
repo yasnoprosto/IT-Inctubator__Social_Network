@@ -3,17 +3,17 @@ import s from "./Profile.module.css";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {ProfileDataType} from "../../App";
-import {ActionsType} from "../../redux/store";
+import {ActionsType, StoreType} from "../../redux/store";
+import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 type ProfilePropsType = {
-    profileData: ProfileDataType
-    dispatch: (action: ActionsType) => void
+    store: StoreType
 }
 export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div className={s.container}>
             <ProfileInfo/>
-            <MyPosts profileData={props.profileData} dispatch={props.dispatch}/>
+            <MyPostsContainer store={props.store}/>
         </div>
     );
 };
