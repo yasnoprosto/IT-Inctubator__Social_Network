@@ -2,10 +2,10 @@ import React from "react";
 import s from "./Navigation.module.css";
 import {NavLink} from "react-router-dom";
 import {Sidebar} from "./Sidebar/Sidebar";
-import {SidebarDataType} from "../../App";
+import {SidebarPageDataType} from "../../App";
 
 type NavigationPropsType = {
-    sidebarData: SidebarDataType
+    sidebarData: SidebarPageDataType
 }
 
 

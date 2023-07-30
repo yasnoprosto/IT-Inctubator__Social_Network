@@ -1,4 +1,4 @@
-import {SidebarDataType} from "../../App";
+import {SidebarPageDataType} from "../../App";
 import {v1} from "uuid";
 import avatar from "../../components/avatar_sidebar.png";
 
@@ -22,7 +22,7 @@ const initialState = {
     ]
 };
 
-export const sidebarReducer = (state: SidebarDataType = initialState, action: any) => {
+export const sidebarReducer = (state: SidebarPageDataType = initialState, action: any): SidebarPageDataType => {
 
     return state
 }

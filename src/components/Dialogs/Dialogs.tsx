@@ -1,17 +1,9 @@
 import s from "./Dialogs.module.css";
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React from "react";
+import {DialogsPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    newMessageText: string
-    mappedDialogsUsers: JSX.Element[]
-    mappedDialogsMessages: JSX.Element[]
-    onKeyUpCallback: (e: KeyboardEvent<HTMLTextAreaElement>) => void
-    onChangeCallback: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    onClickCallback: () => void
-}
-
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
-
+export const Dialogs = (props: DialogsPropsType) => {
+    debugger
     return (
         <div className={s.container}>
             <div>
@@ -21,12 +13,12 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 {props.mappedDialogsMessages}
                 <div className={s.inputButtonContainer}>
                     <textarea
-                        onKeyUp={(e) => props.onKeyUpCallback(e)}
-                        onChange={(e) => props.onChangeCallback(e)}
+                        onKeyUp={(e) => props.onKeyUpHandler(e, props.dialogsPage)}
+                        onChange={(e) => props.onChangeHandler(e)}
                         className={s.textarea}
                         value={props.newMessageText}></textarea>
                     <span>
-                <button onClick={props.onClickCallback}
+                <button onClick={() => props.onClickHandler(props.dialogsPage)}
                         className={s.sendMessageButton}>SEND</button>
                 </span>
                 </div>

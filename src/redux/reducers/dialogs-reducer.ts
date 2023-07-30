@@ -1,8 +1,8 @@
 import {v1} from "uuid";
-import {DialogsDataType} from "../../App";
+import {DialogsPageDataType} from "../../App";
 
 
-const initialState: DialogsDataType = {
+const initialState: DialogsPageDataType = {
     dialogsUsers: [
         {
             userId: v1(),
@@ -50,9 +50,9 @@ const initialState: DialogsDataType = {
     newMessageText: ""
 }
 
-export const dialogsReducer = (state: DialogsDataType = initialState, action: any) => {
+export const dialogsReducer = (state: DialogsPageDataType = initialState, action: any): DialogsPageDataType => {
     switch (action.type) {
-        case "ADD-MESSAGE": {
+        case "SEND-MESSAGE": {
             const newMessage = {
                 messageId: v1(),
                 messageText: state.newMessageText
@@ -70,10 +70,10 @@ export const dialogsReducer = (state: DialogsDataType = initialState, action: an
     }
 };
 
-export type AddMessageActionType = ReturnType<typeof addMessageAC>
+export type SendMessageActionType = ReturnType<typeof sendMessageAC>
 
-export const addMessageAC = () => {
-    return {type: "ADD-MESSAGE"};
+export const sendMessageAC = () => {
+    return {type: "SEND-MESSAGE"};
 };
 
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>

@@ -1,65 +1,63 @@
-import s from "./Dialogs.module.css";
 import {DialogUsers} from "./Dialog/DialogUsers";
 import {DialogMessages} from "./Dialog/DialogMessages";
 import React, {ChangeEvent, KeyboardEvent} from "react";
-import {addMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogs-reducer";
+import {sendMessageAC, updateNewMessageAC} from "../../redux/reducers/dialogs-reducer";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
+import {connect} from "react-redux";
+import {AppStateDataType, DialogsPageDataType} from "../../App";
+import {Dispatch} from "redux";
 
-type DialogsContainerPropsType = {}
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export const DialogsContainer: React.FC<DialogsContainerPropsType> = (props) => {
+export type MapStateToPropsType = {
+    newMessageText: string
+    dialogsPage: DialogsPageDataType
+    mappedDialogsUsers: JSX.Element[]
+    mappedDialogsMessages: JSX.Element[]
+};
 
-    return (
-        <div className={s.container}>
-            <StoreContext.Consumer>{
-                (store) => {
-                    const state = store.getState();
+export type MapDispatchToPropsType = {
+    onClickHandler: (dialogsPage: DialogsPageDataType) => void
+    onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    onKeyUpHandler: (e: KeyboardEvent<HTMLTextAreaElement>, dialogsData: DialogsPageDataType) => void
+}
 
-                    const mappedDialogsUsers = state.dialogsData.dialogsUsers.map((u, i) => {
-                        return (
-                            <DialogUsers key={i} userId={u.userId} userName={u.userName}/>
-                        );
-                    });
+const mapStateToProps = (state: AppStateDataType): MapStateToPropsType => {
+    return {
+        newMessageText: state.dialogsData.newMessageText,
+        dialogsPage: state.dialogsData,
+        mappedDialogsUsers: state.dialogsData.dialogsUsers.map((u, i) => {
+            return (
+                <DialogUsers key={i} userId={u.userId} userName={u.userName}/>
+            );
+        }),
+        mappedDialogsMessages: state.dialogsData.dialogsMessages.map((m, i) => {
+            return (
+                <DialogMessages key={i} messageId={m.messageId} messageText={m.messageText}/>
+            );
+        }),
+    };
+};
 
-
-                    const mappedDialogsMessages = state.dialogsData.dialogsMessages.map((m, i) => {
-                        return (
-                            <DialogMessages key={i} messageId={m.messageId} messageText={m.messageText}/>
-                        );
-                    });
-
-                    const onClickHandler = () => {
-                        if (state.dialogsData.newMessageText.trim()) {
-
-                            store.dispatch(addMessageAC());
-                        }
-                    };
-
-                    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                        store.dispatch(updateNewMessageAC(e.currentTarget.value));
-                    };
-
-                    const onKeyUpHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-                        if (e.key === "Enter") {
-                            if (state.dialogsData.newMessageText.trim()) {
-                                store.dispatch(addMessageAC());
-                            }
-                        }
-                    };
-
-                    return (
-                        <Dialogs
-                            newMessageText={state.dialogsData.newMessageText}
-                            mappedDialogsUsers={mappedDialogsUsers}
-                            mappedDialogsMessages={mappedDialogsMessages}
-                            onKeyUpCallback={onKeyUpHandler}
-                            onChangeCallback={onChangeHandler}
-                            onClickCallback={onClickHandler}/>
-                    );
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        onClickHandler: (dialogsPage: DialogsPageDataType): void => {
+            if (dialogsPage.newMessageText.trim()) {
+                dispatch(sendMessageAC());
+            }
+        },
+        onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => {
+            debugger
+            dispatch(updateNewMessageAC(e.currentTarget.value));
+        },
+        onKeyUpHandler: (e: KeyboardEvent<HTMLTextAreaElement>, dialogsPage: DialogsPageDataType) => {
+            if (e.key === "Enter") {
+                if (dialogsPage.newMessageText.trim()) {
+                    dispatch(sendMessageAC());
                 }
             }
-            </StoreContext.Consumer>
-        </div>
-    );
+        }
+    };
 };
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);

@@ -2,53 +2,55 @@ import React, {ChangeEvent, KeyboardEvent, useRef} from "react";
 import {Post} from "./Post";
 import {addPostAC, updateNewPostTextAC} from "../../../redux/reducers/profile-reducer";
 import {MyPosts} from "./MyPosts";
-import {StoreContext} from "../../../StoreContext";
+import {connect} from "react-redux";
+import {AppStateDataType} from "../../../App";
+import {store} from "../../../redux/redux-store";
 
-type MyPostsContainerPropsType = {}
+export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export const MyPostsContainer: React.FC<MyPostsContainerPropsType> = (props) => {
+type MapStateToPropsType = {
+    newPostText: string
+    mappedPostsData: JSX.Element[]
+}
 
-    const inputRef = useRef<HTMLTextAreaElement>(null);
+// const inputRef = useRef<HTMLTextAreaElement>(null);
 
-        return (
-            <div>
-                <StoreContext.Consumer>{
-                    (store) => {
-                        const state = store.getState().profileData
-
-                        const mappedPostsData = state.postsData.map((p, i) => {
-                            return (
-                                <Post key={i} postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
-                            );
-                        });
+type MapDispatchToPropsType = {
+    addPost: (state: AppStateDataType) => void
+    onKeyUpHandler: (e: KeyboardEvent<HTMLTextAreaElement>, state: AppStateDataType) => void
+    onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void
+}
 
 
-                        const addPost = () => {
-                            debugger
-                            if(state.newPostText.trim()) {
-                                store.dispatch(addPostAC());
-                            }
-                        };
+const mapStateToProps = (state: AppStateDataType): MapStateToPropsType => {
+    return {
+        newPostText: state.profileData.newPostText,
+        mappedPostsData: state.profileData.postsData.map((p, i) => {
+            return (
+                <Post key={i} postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
+            );
+        }),
+    };
+};
 
-                        const onKeyUpHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-                            if(e.key === "Enter") {
-                                if(state.newPostText.trim()) {
-                                    store.dispatch(addPostAC());
-                                }
-                            }
-                        }
+const mapDispatchToProps = (): MapDispatchToPropsType => {
+    return {
+        addPost: (state: AppStateDataType) => {
+            if (state.profileData.newPostText.trim()) {
+                store.dispatch(addPostAC());
+            }
+        },
+        onKeyUpHandler: (e: KeyboardEvent<HTMLTextAreaElement>, state: AppStateDataType) => {
+            if (e.key === "Enter") {
+                if (state.profileData.newPostText.trim()) {
+                    store.dispatch(addPostAC());
+                }
+            }
+        },
+        onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => {
+            store.dispatch(updateNewPostTextAC(e.currentTarget.value));
+        },
+    };
+};
 
-                        const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                            store.dispatch(updateNewPostTextAC(e.currentTarget.value));
-                        };
-                        return (
-                        <MyPosts mappedPosts={mappedPostsData} inputRef={inputRef} newPostText={state.newPostText}
-                                 addPostCallback={addPost} onKeyUpCallback={onKeyUpHandler}
-                                 onChangeCallback={onChangeHandler}/>
-                            )
-                    }
-                }</StoreContext.Consumer>
-            </div>
-        );
-    }
-;
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);

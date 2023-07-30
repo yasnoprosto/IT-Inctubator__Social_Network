@@ -14,6 +14,7 @@ import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
 import {ActionsType, StoreType} from "./redux/store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+// import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 
@@ -26,23 +27,23 @@ export type AppStoreDataType = {
 
 
 export type AppStateDataType = {
-    profileData: ProfileDataType
-    dialogsData: DialogsDataType
-    sidebarData: SidebarDataType
+    profileData: ProfilePageDataType
+    dialogsData: DialogsPageDataType
+    sidebarData: SidebarPageDataType
 }
 
-export type ProfileDataType = {
+export type ProfilePageDataType = {
     postsData: PostType[]
     newPostText: string
 }
 
-export type DialogsDataType = {
+export type DialogsPageDataType = {
     dialogsUsers: DialogType[]
     dialogsMessages: DialogMessagesType[]
     newMessageText: string
 }
 
-export type SidebarDataType = {
+export type SidebarPageDataType = {
     friendsListData: FriendsListDataType[]
 }
 

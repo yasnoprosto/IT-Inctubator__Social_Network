@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {ProfileDataType} from "../../App";
+import {ProfilePageDataType} from "../../App";
 
-const initialState: ProfileDataType = {
+const initialState: ProfilePageDataType = {
     postsData: [
         {
             postId: v1(),
@@ -28,7 +28,8 @@ const initialState: ProfileDataType = {
 }
 
 
-export const profileReducer = (state: ProfileDataType = initialState, action: any) => {
+export const profileReducer = (state: ProfilePageDataType = initialState, action: any): ProfilePageDataType => {
+    debugger
     switch (action.type) {
         case "ADD-POST": {
             const newPost = {
