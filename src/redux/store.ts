@@ -8,14 +8,14 @@ import {
 import {sidebarReducer} from "./reducers/sidebar-reducer";
 import {profileReducer} from "./reducers/profile-reducer";
 import {
-    AddMessageActionType,
+    SendMessageActionType,
     dialogsReducer,
     UpdateNewMessageActionType
 } from "./reducers/dialogs-reducer";
 
 export type addPostAT = AddPostActionType
 export type updateNewPostAT = UpdateNewPostTextActionType
-export type addMessageAT = AddMessageActionType
+export type addMessageAT = SendMessageActionType
 export type updateNewMessageAT = UpdateNewMessageActionType
 
 export type ActionsType = updateNewPostAT | addPostAT | addMessageAT | updateNewMessageAT
@@ -28,7 +28,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export const store: StoreType = {
+export const store: any = {
     _state: {
         profileData: {
             postsData: [
@@ -133,6 +133,7 @@ export const store: StoreType = {
     },
 
     dispatch(action: ActionsType) {
+        debugger
         this._state.profileData = profileReducer(this._state.profileData, action);
         this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
         this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);

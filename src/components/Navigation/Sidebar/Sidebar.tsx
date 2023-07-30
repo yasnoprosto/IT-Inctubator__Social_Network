@@ -1,11 +1,11 @@
 import React from "react";
 import s from "../Sidebar/Sidebar.module.css"
 import avatar from "../../avatar_sidebar.png"
-import {SidebarDataType} from "../../../App";
+import {SidebarPageDataType} from "../../../App";
 import {NavLink} from "react-router-dom";
 
 type SidebarPropsType = {
-    sidebarData: SidebarDataType
+    sidebarData: SidebarPageDataType
 }
 
 export type FriendsListDataType = {
