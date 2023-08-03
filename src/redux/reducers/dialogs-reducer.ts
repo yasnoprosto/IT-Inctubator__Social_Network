@@ -51,19 +51,17 @@ const initialState: DialogsPageDataType = {
 }
 
 export const dialogsReducer = (state: DialogsPageDataType = initialState, action: any): DialogsPageDataType => {
+    debugger
     switch (action.type) {
         case "SEND-MESSAGE": {
             const newMessage = {
                 messageId: v1(),
                 messageText: state.newMessageText
             };
-            state.dialogsMessages.push(newMessage);
-            state.newMessageText = "";
-            return state;
+            return {...state, dialogsMessages: [...state.dialogsMessages, newMessage], newMessageText: ""};
         }
         case "UPDATE-NEW-MESSAGE-TEXT": {
-            state.newMessageText = action.value;
-            return state;
+            return {...state, newMessageText: action.value};
         }
         default:
             return state;
@@ -79,6 +77,7 @@ export const sendMessageAC = () => {
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 
 export const updateNewMessageAC = (value: string) => {
+    debugger
     return {
         type: "UPDATE-NEW-MESSAGE-TEXT",
         value: value

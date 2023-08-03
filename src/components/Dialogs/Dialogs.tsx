@@ -1,24 +1,57 @@
 import s from "./Dialogs.module.css";
-import React from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import {DialogsPropsType} from "./DialogsContainer";
+import {DialogUsers} from "./Dialog/DialogUsers";
+import {DialogMessages} from "./Dialog/DialogMessages";
 
 export const Dialogs = (props: DialogsPropsType) => {
-    debugger
+
+    const mappedDialogsUsers = props.dialogsData.dialogsUsers.map((u, i) => {
+        return (
+            <DialogUsers key={i} userId={u.userId} userName={u.userName}/>
+        );
+    });
+
+    const mappedDialogsMessages = props.dialogsData.dialogsMessages.map((m, i) => {
+        return (
+            <DialogMessages key={i} messageId={m.messageId} messageText={m.messageText}/>
+        );
+    });
+
+    const onKeyUp = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === "Enter") {
+            if (props.dialogsData.newMessageText.trim()) {
+                props.onKeyUpHandler();
+            }
+        }
+    };
+
+    const onClick = () => {
+        if (props.dialogsData.newMessageText.trim()) {
+            props.onClickHandler();
+        }
+    };
+
+    const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.onChangeHandler(e)
+    };
+
+
     return (
         <div className={s.container}>
             <div>
-                {props.mappedDialogsUsers}
+                {mappedDialogsUsers}
             </div>
             <div className={s.chatContainer}>
-                {props.mappedDialogsMessages}
+                {mappedDialogsMessages}
                 <div className={s.inputButtonContainer}>
                     <textarea
-                        onKeyUp={(e) => props.onKeyUpHandler(e, props.dialogsPage)}
-                        onChange={(e) => props.onChangeHandler(e)}
+                        onKeyUp={onKeyUp}
+                        onChange={onChange}
                         className={s.textarea}
                         value={props.newMessageText}></textarea>
                     <span>
-                <button onClick={() => props.onClickHandler(props.dialogsPage)}
+                <button onClick={onClick}
                         className={s.sendMessageButton}>SEND</button>
                 </span>
                 </div>

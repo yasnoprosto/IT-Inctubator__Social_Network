@@ -36,14 +36,16 @@ export const profileReducer = (state: ProfilePageDataType = initialState, action
                 postId: v1(),
                 postLikesCount: 0,
                 postText: state.newPostText
-            };
-            state.postsData.unshift(newPost);
-            state.newPostText = "";
-            return state;
+            };// state.postsData.unshift(newPost);
+            // state.newPostText = "";
+            // return state;
+            return {
+                ...state, postsData: [newPost ,...state.postsData], newPostText: ""
+            }
         }
         case "UPDATE-NEW-POST-TEXT": {
-            state.newPostText = action.value;
-            return state;
+            debugger
+            return {...state, newPostText: action.value}
         }
         default:
             return state;
@@ -65,6 +67,7 @@ export type UpdateNewPostTextActionType = {
 
 
 export const updateNewPostTextAC = (value: string): UpdateNewPostTextActionType => {
+    debugger
     return {
         type: "UPDATE-NEW-POST-TEXT",
         value: value
