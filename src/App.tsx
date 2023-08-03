@@ -12,18 +12,8 @@ import {PostType} from "./components/Profile/MyPosts/Post";
 import {DialogType} from "./components/Dialogs/Dialog/DialogUsers";
 import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
-import {ActionsType, StoreType} from "./redux/store";
+import {store} from "./redux/store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-// import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-
-
-
-
-export type AppStoreDataType = {
-    state: AppStateDataType
-    store: StoreType
-    dispatch: (action: ActionsType) => void
-}
 
 
 export type AppStateDataType = {
@@ -48,7 +38,7 @@ export type SidebarPageDataType = {
 }
 
 
-const App: React.FC<AppStoreDataType> = (props) => {
+const App = () => {
     return (
                 <div className={"app-wrapper"}>
                 <div className={"header"}>
@@ -56,7 +46,7 @@ const App: React.FC<AppStoreDataType> = (props) => {
                 </div>
 
                 <div className={"navigation_content_wrapper"}>
-                    <Navigation sidebarData={props.state.sidebarData}/>
+                    <Navigation sidebarData={store.getState().sidebarData}/>
                     <div className={"content"}>
                         <Routes>
                             <Route path={"/profile"}

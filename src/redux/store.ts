@@ -28,6 +28,7 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
+
 export const store: any = {
     _state: {
         profileData: {
@@ -138,6 +139,9 @@ export const store: any = {
         this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
         this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);
 
-        this._callSubscriber();
+        this._callSubscriber(this._state);
     }
 };
+
+// @ts-ignore
+window.store = store;
