@@ -25,7 +25,7 @@ const initialState: ProfilePageDataType = {
         },
     ],
     newPostText: ""
-}
+};
 
 
 export const profileReducer = (state: ProfilePageDataType = initialState, action: any): ProfilePageDataType => {
@@ -40,12 +40,17 @@ export const profileReducer = (state: ProfilePageDataType = initialState, action
             // state.newPostText = "";
             // return state;
             return {
-                ...state, postsData: [newPost ,...state.postsData], newPostText: ""
-            }
+                ...state,
+                postsData: [newPost, ...state.postsData],
+                newPostText: ""
+            };
         }
         case "UPDATE-NEW-POST-TEXT": {
             debugger
-            return {...state, newPostText: action.value}
+            return {
+                ...state,
+                newPostText: action.value
+            };
         }
         default:
             return state;
@@ -57,7 +62,7 @@ export type AddPostActionType = {
 };
 
 export const addPostAC = (): AddPostActionType => {
-    return {type: "ADD-POST"}
+    return {type: "ADD-POST"};
 };
 
 export type UpdateNewPostTextActionType = {
@@ -71,5 +76,5 @@ export const updateNewPostTextAC = (value: string): UpdateNewPostTextActionType 
     return {
         type: "UPDATE-NEW-POST-TEXT",
         value: value
-    }
+    };
 };
