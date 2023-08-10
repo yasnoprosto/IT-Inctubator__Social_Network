@@ -34,22 +34,22 @@ export const store: any = {
         profileData: {
             postsData: [
                 {
-                    postId: v1(),
+                    postID: v1(),
                     postLikesCount: 40,
                     postText: "Hello"
                 },
                 {
-                    postId: v1(),
+                    postID: v1(),
                     postLikesCount: 68,
                     postText: "I'm Learning React"
                 },
                 {
-                    postId: v1(),
+                    postID: v1(),
                     postLikesCount: 113,
                     postText: "My goal is to be React Developer"
                 },
                 {
-                    postId: v1(),
+                    postID: v1(),
                     postLikesCount: 104,
                     postText: "I love u!"
                 },
@@ -59,45 +59,45 @@ export const store: any = {
         dialogsData: {
             dialogsUsers: [
                 {
-                    userId: v1(),
+                    userID: v1(),
                     userName: "Denis"
                 },
                 {
-                    userId: v1(),
+                    userID: v1(),
                     userName: "Alex"
                 },
                 {
-                    userId: v1(),
+                    userID: v1(),
                     userName: "Michael"
                 },
                 {
-                    userId: v1(),
+                    userID: v1(),
                     userName: "Ludovic"
                 },
                 {
-                    userId: v1(),
+                    userID: v1(),
                     userName: "Cinderella"
                 }
             ],
             dialogsMessages: [
                 {
-                    messageId: v1(),
+                    messageID: v1(),
                     messageText: "Hello"
                 },
                 {
-                    messageId: v1(),
+                    messageID: v1(),
                     messageText: "How are u?"
                 },
                 {
-                    messageId: v1(),
+                    messageID: v1(),
                     messageText: "I love y'all"
                 },
                 {
-                    messageId: v1(),
+                    messageID: v1(),
                     messageText: "Hello"
                 },
                 {
-                    messageId: v1(),
+                    messageID: v1(),
                     messageText: "Let's fun"
                 },
             ],
@@ -135,9 +135,9 @@ export const store: any = {
 
     dispatch(action: ActionsType) {
         debugger
-        this._state.profileData = profileReducer(this._state.profileData, action);
-        this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
-        this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);
+        // this._state.profileData = profileReducer(this._state.profileData, action);
+        // this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
+        // this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);
 
         this._callSubscriber(this._state);
     }

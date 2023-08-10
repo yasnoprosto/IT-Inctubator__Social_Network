@@ -4,13 +4,13 @@ import {NavLink} from "react-router-dom";
 
 export type DialogType = {
     userName: string;
-    userId: string;
+    userID: string;
 }
 
 export const DialogUsers = (props: DialogType) => {
-    const {userName, userId} = props
+    const {userName, userID} = props
 
-    const path = "" + userId
+    const path = "" + userID
 
     return (
         <div className={s.container}>

@@ -8,13 +8,13 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     const mappedDialogsUsers = props.dialogsData.dialogsUsers.map((u, i) => {
         return (
-            <DialogUsers key={i} userId={u.userId} userName={u.userName}/>
+            <DialogUsers key={i} userID={u.userID} userName={u.userName}/>
         );
     });
 
     const mappedDialogsMessages = props.dialogsData.dialogsMessages.map((m, i) => {
         return (
-            <DialogMessages key={i} messageId={m.messageId} messageText={m.messageText}/>
+            <DialogMessages key={i} messageID={m.messageID} messageText={m.messageText}/>
         );
     });
 
