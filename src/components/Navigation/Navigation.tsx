@@ -16,6 +16,7 @@ export const Navigation: React.FC<NavigationPropsType> = (props) => {
         <div className={s.navigation}>
                 <NavLink className={({isActive}) => isActive ? s.linkActive : s.link}  to="/profile">Profile</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.linkActive : s.link} to="/dialogs">Messages</NavLink>
+                <NavLink className={({isActive}) => isActive ? s.linkActive : s.link} to="/users">Users</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.linkActive : s.link} to="/news">News</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.linkActive : s.link} to="/music">Music</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.linkActive : s.link} to="/settings">Settings</NavLink>

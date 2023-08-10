@@ -4,22 +4,22 @@ import {ProfilePageDataType} from "../../App";
 const initialState: ProfilePageDataType = {
     postsData: [
         {
-            postId: v1(),
+            postID: v1(),
             postLikesCount: 40,
             postText: "Hello"
         },
         {
-            postId: v1(),
+            postID: v1(),
             postLikesCount: 68,
             postText: "I'm Learning React"
         },
         {
-            postId: v1(),
+            postID: v1(),
             postLikesCount: 113,
             postText: "My goal is to be React Developer"
         },
         {
-            postId: v1(),
+            postID: v1(),
             postLikesCount: 104,
             postText: "I love u!"
         },
@@ -27,13 +27,14 @@ const initialState: ProfilePageDataType = {
     newPostText: ""
 };
 
+type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
 
 export const profileReducer = (state: ProfilePageDataType = initialState, action: any): ProfilePageDataType => {
     debugger
     switch (action.type) {
         case "ADD-POST": {
             const newPost = {
-                postId: v1(),
+                postID: v1(),
                 postLikesCount: 0,
                 postText: state.newPostText
             };// state.postsData.unshift(newPost);

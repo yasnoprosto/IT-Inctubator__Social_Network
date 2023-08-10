@@ -2,7 +2,7 @@ import React from "react";
 import s from "./DialogMessages.module.css"
 
 export type DialogMessagesType = {
-    messageId: string
+    messageID: string
     messageText: string
 }
 export const DialogMessages = (props: DialogMessagesType) => {

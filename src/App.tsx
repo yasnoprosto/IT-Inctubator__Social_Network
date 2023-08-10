@@ -14,12 +14,14 @@ import {DialogMessagesType} from "./components/Dialogs/Dialog/DialogMessages";
 import {FriendsListDataType} from "./components/Navigation/Sidebar/Sidebar";
 import {store} from "./redux/store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 
 export type AppStateDataType = {
     profileData: ProfilePageDataType
     dialogsData: DialogsPageDataType
     sidebarData: SidebarPageDataType
+    usersPage: UsersPageDataType
 }
 
 export type ProfilePageDataType = {
@@ -33,6 +35,25 @@ export type DialogsPageDataType = {
     newMessageText: string
 }
 
+export type UsersPageDataType = {
+    users: UsersType[]
+};
+
+export type UsersType = {
+    userID: string
+    photoUrl: string
+    isFollowed: boolean
+    fullName: string
+    status: string
+    location: UsersLocationType
+};
+
+type UsersLocationType = {
+        cityName: string
+        countryName: string
+    };
+
+
 export type SidebarPageDataType = {
     friendsListData: FriendsListDataType[]
 }
@@ -40,28 +61,30 @@ export type SidebarPageDataType = {
 
 const App = () => {
     return (
-                <div className={"app-wrapper"}>
-                <div className={"header"}>
-                    <Header/>
-                </div>
-
-                <div className={"navigation_content_wrapper"}>
-                    <Navigation sidebarData={store.getState().sidebarData}/>
-                    <div className={"content"}>
-                        <Routes>
-                            <Route path={"/profile"}
-                                   element={<Profile />}/>
-                            <Route path={"/dialogs"}
-                                   element={<DialogsContainer/>}/>
-                            <Route path={"/news"} element={<News/>}/>
-                            <Route path={"/music"} element={<Music/>}/>
-                            <Route path={"/settings"} element={<Settings/>}/>
-                        </Routes>
-
-                    </div>
-                </div>
-                <Footer/>
+        <div className={"app-wrapper"}>
+            <div className={"header"}>
+                <Header/>
             </div>
+
+            <div className={"navigation_content_wrapper"}>
+                <Navigation sidebarData={store.getState().sidebarData}/>
+                <div className={"content"}>
+                    <Routes>
+                        <Route path={"/profile"}
+                               element={<Profile/>}/>
+                        <Route path={"/dialogs"}
+                               element={<DialogsContainer/>}/>
+                        <Route path={"/users"}
+                               element={<UsersContainer/>}/>
+                        <Route path={"/news"} element={<News/>}/>
+                        <Route path={"/music"} element={<Music/>}/>
+                        <Route path={"/settings"} element={<Settings/>}/>
+                    </Routes>
+
+                </div>
+            </div>
+            <Footer/>
+        </div>
     );
 };
 

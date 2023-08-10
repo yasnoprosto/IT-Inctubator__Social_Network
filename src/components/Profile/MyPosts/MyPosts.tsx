@@ -8,7 +8,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
         const posts = props.postsData.map((p, i) => {
             return (
-                <Post key={i} postId={p.postId} postText={p.postText} postLikesCount={p.postLikesCount}/>
+                <Post key={i} postID={p.postID} postText={p.postText} postLikesCount={p.postLikesCount}/>
             );
         });
 

@@ -3,7 +3,7 @@ import s from "./MyPosts.module.css";
 import avatarCat from "../../Avatar_cat.png";
 
 export type PostType = {
-    postId: string
+    postID: string
     postText: string
     postLikesCount: number
 }
