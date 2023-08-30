@@ -4,7 +4,6 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 import {Post} from "./Post";
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-        debugger
 
         const posts = props.postsData.map((p, i) => {
             return (

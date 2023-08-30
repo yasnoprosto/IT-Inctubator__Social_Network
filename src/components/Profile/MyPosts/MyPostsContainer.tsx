@@ -21,7 +21,6 @@ type MapDispatchToPropsType = {
 
 
 const mapStateToProps = (state: AppStateDataType): MapStateToPropsType => {
-    debugger
     return {
         newPostText: state.profileData.newPostText,
         postsData: state.profileData.postsData,
@@ -29,7 +28,6 @@ const mapStateToProps = (state: AppStateDataType): MapStateToPropsType => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    debugger
     return {
         addPost: () => {
             dispatch(addPostAC());

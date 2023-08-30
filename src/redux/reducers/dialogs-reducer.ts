@@ -51,7 +51,6 @@ const initialState: DialogsPageDataType = {
 }
 
 export const dialogsReducer = (state: DialogsPageDataType = initialState, action: AllDialogsActionsType): DialogsPageDataType => {
-    debugger
     switch (action.type) {
         case "SEND-MESSAGE": {
             const newMessage = {
@@ -80,7 +79,6 @@ export const sendMessageAC = () => {
 export type UpdateNewMessageActionType = ReturnType<typeof updateNewMessageAC>
 
 export const updateNewMessageAC = (value: string) => {
-    debugger
     return {
         type: "UPDATE-NEW-MESSAGE-TEXT",
         value: value

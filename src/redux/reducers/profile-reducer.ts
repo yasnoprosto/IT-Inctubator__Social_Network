@@ -30,7 +30,6 @@ const initialState: ProfilePageDataType = {
 type ProfileActionsTypes = AddPostActionType | UpdateNewPostTextActionType
 
 export const profileReducer = (state: ProfilePageDataType = initialState, action: ProfileActionsTypes): ProfilePageDataType => {
-    debugger
     switch (action.type) {
         case "ADD-POST": {
             const newPost = {
@@ -47,7 +46,6 @@ export const profileReducer = (state: ProfilePageDataType = initialState, action
             };
         }
         case "UPDATE-NEW-POST-TEXT": {
-            debugger
             return {
                 ...state,
                 newPostText: action.value
@@ -73,7 +71,6 @@ export type UpdateNewPostTextActionType = {
 
 
 export const updateNewPostTextAC = (value: string): UpdateNewPostTextActionType => {
-    debugger
     return {
         type: "UPDATE-NEW-POST-TEXT",
         value: value
