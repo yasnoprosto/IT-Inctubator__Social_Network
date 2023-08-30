@@ -5,6 +5,7 @@ import {AppStateDataType, UsersPageDataType, UsersType} from "../../App";
 import {Dispatch} from "redux";
 import {PostType} from "../Profile/MyPosts/Post";
 import {followAC, setUsersAC, unfollowAC} from "../../redux/reducers/users-reducer";
+import {UsersC} from "./UsersC";
 
 export type MapStateToPropsType = {
     users: UsersType[]
@@ -23,14 +24,11 @@ const mapStateToProps = (state: AppStateDataType): MapStateToPropsType => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    debugger
     return {
         follow: (userID: string) => {
-            debugger
             dispatch(followAC(userID))
         },
         unfollow: (userID: string) => {
-            debugger
             dispatch(unfollowAC(userID))
         },
         setUsers: (users: UsersType[]) => dispatch(setUsersAC(users))
@@ -38,4 +36,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 };
 
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC);

@@ -40,10 +40,13 @@ export type UsersPageDataType = {
 };
 
 export type UsersType = {
-    userID: string
-    photoUrl: string
-    isFollowed: boolean
-    fullName: string
+    id: string
+    photos: {
+        small: string | undefined
+        large: string | undefined
+    }
+    followed: boolean
+    name: string
     status: string
     location: UsersLocationType
 };

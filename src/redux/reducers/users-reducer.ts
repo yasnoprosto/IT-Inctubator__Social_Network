@@ -3,50 +3,15 @@ import {UsersPageDataType, UsersType} from "../../App";
 
 
 const initialState: UsersPageDataType = {
-    users: [
-        {
-            userID: "1",
-            photoUrl: "https://media.wired.com/photos/5cdefc28b2569892c06b2ae4/master/w_1920,c_limit/Culture-Grumpy-Cat-487386121-2.jpg",
-            isFollowed: false,
-            fullName: "Denis",
-            status: "Working",
-            location: {
-                cityName: "Ufa",
-                countryName: "Russia"
-            }
-        },
-        {
-            userID: "2",
-            photoUrl: "https://cdn.vectorstock.com/i/preview-1x/11/07/cartoon-image-a-gray-cat-face-vector-25821107.webp",
-            isFollowed: true,
-            fullName: "Ruslan",
-            status: "Chilling",
-            location: {
-                cityName: "Sochi",
-                countryName: "Russia"
-            }
-        },
-        {
-            userID: "3",
-            photoUrl: "https://cdn.vectorstock.com/i/preview-1x/93/14/simple-flat-cartoon-of-a-cute-cat-doing-thumbs-up-vector-47709314.webp",
-            isFollowed: false,
-            fullName: "Elizaveta",
-            status: "Vacation",
-            location: {
-                cityName: "Moscow",
-                countryName: "Russia"
-            }
-        },
-    ]
+    users: []
 };
 
 export const usersReducer = (state: UsersPageDataType = initialState, action: AllUsersActionsType): UsersPageDataType => {
-    debugger
     switch (action.type) {
         case "FOLLOW": {
             return {...state, users: state.users.map(u => {
-                    if (u.userID === action.userID) {
-                        return {...u, isFollowed: true}
+                    if (u.id === action.userID) {
+                        return {...u, followed: true}
                     }
                     return u;
                 })
@@ -54,14 +19,14 @@ export const usersReducer = (state: UsersPageDataType = initialState, action: Al
         }
         case "UNFOLLOW":
             return {...state, users: state.users.map(u => {
-                    if (u.userID === action.userID) {
-                        return {...u, isFollowed: false}
+                    if (u.id === action.userID) {
+                        return {...u, followed: false}
                     }
                     return u;
                 })
             }
         case "SET-USERS":
-            return {...state, users: state.users, ...action.users}
+            return {...state, users: action.users}
         default:
             return state;
     }
@@ -71,14 +36,12 @@ type AllUsersActionsType = followActionType | unfollowActionType | setUsersActio
 export type followActionType= ReturnType<typeof followAC>
 
 export const followAC = (userID: string) => {
-    debugger
     return {type: "FOLLOW", userID} as const;
 };
 
 export type unfollowActionType= ReturnType<typeof unfollowAC>
 
 export const unfollowAC = (userID: string) => {
-    debugger
     return { type: "UNFOLLOW", userID} as const;
 };
 

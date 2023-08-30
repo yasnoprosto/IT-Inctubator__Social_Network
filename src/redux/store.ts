@@ -134,7 +134,6 @@ export const store: any = {
     },
 
     dispatch(action: ActionsType) {
-        debugger
         // this._state.profileData = profileReducer(this._state.profileData, action);
         // this._state.dialogsData = dialogsReducer(this._state.dialogsData, action);
         // this._state.sidebarData = sidebarReducer(this._state.sidebarData, action);
