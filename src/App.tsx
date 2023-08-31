@@ -37,6 +37,9 @@ export type DialogsPageDataType = {
 
 export type UsersPageDataType = {
     users: UsersType[]
+    pageSize: number
+    totalCount: number
+    currentPage: number
 };
 
 export type UsersType = {
