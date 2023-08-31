@@ -30,3 +30,16 @@
     justify-content: left;
     gap: 100px;
 }
+
+.page {
+
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.page:hover, .selectedPage:hover {
+    cursor: pointer;
+}
+
