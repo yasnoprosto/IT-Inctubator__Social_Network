@@ -25,7 +25,7 @@ export type MapDispatchToPropsType = {
     setUsers: (users: UsersType[]) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
-}
+}¸
 
 type UsersContainerProps = {
     users: UsersType[]
